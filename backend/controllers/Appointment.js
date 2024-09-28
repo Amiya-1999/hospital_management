@@ -9,19 +9,16 @@ export const getAllAppointment = async (req, res) => {
 
 // Add new appointment
 export const addAppointment = async (req, res) => {
-  for(let i=0; i<req.body.length; i++) {
-    const { patientDetails, doctorDetails, date } = req.body[i];
-    const newAppointment = new Appointment({
-      patientDetails,
-      doctorDetails,
-      date,
-    });
-    newAppointment
-      .save()
-      .then((appointment) => res.json(appointment))
-      .catch((error) => res.status(400).json("Error: " + error));
-  }
-
+  const { patientDetails, doctorDetails, date } = req.body;
+  const newAppointment = new Appointment({
+    patientDetails,
+    doctorDetails,
+    date,
+  });
+  newAppointment
+    .save()
+    .then((appointment) => res.json(appointment))
+    .catch((error) => res.status(400).json("Error: " + error));
 };
 
 // Update appointment data
